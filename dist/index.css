@@ -1,0 +1,167 @@
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, "Liberation Sans", "Nimbus Sans L", sans-serif;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.channel {
+  display: inline-block;
+  max-width: 24em;
+  width: 100%;
+  border: 1px solid;
+  border-radius: 0.5em;
+  margin: 0 1em 1em 0;
+  vertical-align: top;
+}
+.channel__header {
+  height: 3em;
+  padding: 1em;
+  border-bottom: 1px solid;
+  white-space: nowrap;
+}
+.channel__logo {
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 1em;
+}
+.channel__title {
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+  max-width: 75%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.channel__program {
+  padding: 0;
+  margin: 0;
+}
+.channel__wrap {
+  padding: 1em;
+  padding-top: 4em;
+  height: 88%;
+  max-height: calc(100vh - 4em);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.telecast {
+  list-style: none;
+  white-space: nowrap;
+  height: 2em;
+  padding: 0 1em;
+  position: relative;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.telecast:last-child {
+  border-bottom-right-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+}
+.telecast__title {
+  text-overflow: ellipsis;
+  max-width: 80%;
+  overflow-x: hidden;
+}
+.telecast__time {
+  font-weight: bold;
+  padding-right: 1rem;
+  font-size: 0.8rem;
+}
+.telecast__time,
+.telecast__title {
+  display: inline-block;
+  line-height: 2em;
+  vertical-align: middle;
+}
+.telecast:after {
+  opacity: 0;
+  content: attr(data-description);
+  background: #f0f0f0;
+  padding: 0.5em;
+  border: 1px solid;
+  position: absolute;
+  right: 0;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  max-width: 20em;
+  border-radius: 0.5em;
+  white-space: normal;
+  word-break: break-all;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  -webkit-transition-delay: 0.1s;
+          transition-delay: 0.1s;
+  pointer-events: none;
+  z-index: 2;
+}
+.telecast:hover:after {
+  opacity: 1;
+  -webkit-transition-delay: 0.5s;
+          transition-delay: 0.5s;
+  -webkit-transform: translateX(30%);
+          transform: translateX(30%);
+}
+@media (max-width: 30em) {
+  .telecast {
+    margin-right: 0;
+  }
+  .telecast:hover:after {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+#sport:checked ~ .channel__wrap > .channel > ul.channel__program > li.telecast[data-index~="sport"] {
+  background: #3498db;
+}
+#sport:checked ~ .checkbox__group > .checkbox > label[for~="sport"] {
+  background: #3498db;
+}
+#series:checked ~ .channel__wrap > .channel > ul.channel__program > li.telecast[data-index~="series"] {
+  background: #27ae60;
+}
+#series:checked ~ .checkbox__group > .checkbox > label[for~="series"] {
+  background: #27ae60;
+}
+#movies:checked ~ .channel__wrap > .channel > ul.channel__program > li.telecast[data-index~="movies"] {
+  background: #f1c40f;
+}
+#movies:checked ~ .checkbox__group > .checkbox > label[for~="movies"] {
+  background: #f1c40f;
+}
+.checkbox__group {
+  padding: 1em 0;
+  position: fixed;
+  width: 100%;
+  background: #dab10d;
+  text-align: center;
+  z-index: 3;
+}
+.checkbox__group .checkbox {
+  width: auto;
+  vertical-align: middle;
+  margin: 0;
+  display: inline-block;
+}
+.checkbox__group .checkbox > label {
+  position: relative;
+  width: auto;
+  padding: .4em 1em;
+  border-radius: 0;
+  border: 1px solid;
+  border-right: none;
+  background: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.checkbox__group .checkbox:first-child > label {
+  margin-left: 0;
+  border-radius: .5em 0 0 .5em;
+}
+.checkbox__group .checkbox:last-child > label {
+  margin-right: 0;
+  border-radius: 0 .5em .5em 0;
+  border-right: 1px solid;
+}

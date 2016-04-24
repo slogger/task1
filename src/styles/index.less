@@ -1,0 +1,200 @@
+body
+{
+    font-family: "Segoe UI", "Helvetica Neue", Arial, "Liberation Sans", "Nimbus Sans L", sans-serif;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.channel
+{
+    display: inline-block;
+    max-width: 24em;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 0.5em;
+    margin: 0 1em 1em 0;
+    vertical-align: top;
+
+    &__header
+    {
+        height: 3em;
+        padding: 1em;
+        border-bottom: 1px solid;
+        white-space: nowrap;
+    }
+
+    &__logo
+    {
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        padding-right: 1em;
+    }
+
+    &__title
+    {
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+        max-width: 75%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__program
+    {
+        padding: 0;
+        margin: 0;
+    }
+
+    &__wrap
+    {
+        padding: 1em;
+        padding-top: 4em;
+        height: 88%;
+        max-height: ~"calc(100vh - 4em)";
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+.telecast
+{
+    list-style: none;
+    white-space: nowrap;
+    height: 2em;
+    padding: 0 1em;
+    position: relative;
+    transition: all 0.3s ease-out;
+    &:last-child
+    {
+        border-bottom-right-radius: 0.5em;
+        border-bottom-left-radius: 0.5em;
+    }
+
+    &__title
+    {
+        text-overflow: ellipsis;
+        max-width: 80%;
+        overflow-x: hidden;;
+    }
+
+    &__time
+    {
+        font-weight: bold;
+        padding-right: 1rem;
+        font-size: 0.8rem;
+    }
+
+    &__time,
+    &__title
+    {
+        display: inline-block;
+        line-height: 2em;
+        vertical-align: middle;
+    }
+
+
+    &:after
+    {
+        opacity: 0;
+        content: attr(data-description);
+        background: #f0f0f0;
+        padding: 0.5em;
+        border: 1px solid;
+        position: absolute;
+        right: 0;
+        transform: translateX(100%);
+        max-width: 20em;
+        border-radius: 0.5em;
+        white-space: normal;
+        word-break: break-all;
+        transition: all 0.3s ease-out;
+        transition-delay: 0.1s;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    &:hover:after
+    {
+        opacity: 1;
+        transition-delay: 0.5s;
+        transform: translateX(30%);
+    }
+}
+
+@media (max-width: 30em)
+{
+    .telecast
+    {
+        margin-right: 0;
+        &:hover:after
+        {
+            transform: translateX(0);
+        }
+    }
+}
+
+.generate (@tag, @color)
+{
+    @checked: ~"#@{tag}:checked";
+    @{checked}
+    {
+        & ~ .channel__wrap > .channel > ul.channel__program > li.telecast[data-index~=@{tag}]
+        {
+            background: @color;
+        }
+
+        & ~ .checkbox__group > .checkbox > label[for~=@{tag}]
+        {
+            background: @color;
+        }
+    }
+}
+
+.generate("sport", #3498db);
+.generate("series", #27ae60);
+.generate("movies", #f1c40f);
+
+.checkbox__group
+{
+    padding: 1em 0;
+    position: fixed;
+    width: 100%;
+    background: darken(#f1c40f, 5%);;
+    text-align: center;
+    z-index: 3;
+    .checkbox
+    {
+        width: auto;
+        vertical-align: middle;
+        margin: 0;
+        display: inline-block;
+
+        & > label
+        {
+          position: relative;
+          width: auto;
+          padding: .4em 1em;
+          border-radius: 0;
+          border: 1px solid;
+          border-right: none;
+          background: white;
+          user-select: none;
+        }
+
+        &:first-child > label
+        {
+            margin-left: 0;
+            border-radius: .5em 0 0 .5em;
+        }
+
+        &:last-child > label
+        {
+            margin-right: 0;
+            border-radius: 0 .5em .5em 0;
+            border-right: 1px solid;
+        }
+    }
+}

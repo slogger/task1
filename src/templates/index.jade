@@ -1,0 +1,28 @@
+head
+    link(rel="stylesheet", href="index.css")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(charset="utf-8")
+body
+    input#sport(type="checkbox", style="display: none;")
+    input#series(type="checkbox", style="display: none;")
+    input#movies(type="checkbox", style="display: none;")
+
+    .checkbox__group
+        .checkbox
+            label(for="sport") Спорт
+        .checkbox
+            label(for="series") Сериалы
+        .checkbox
+            label(for="movies") Фильмы
+
+    .channel__wrap
+        each channel in data
+            .channel
+                .channel__header
+                    img(src=channel.logo, class="channel__logo")
+                    h2.channel__title=channel.title
+                ul.channel__program
+                    each telecast in channel.program
+                        li(class="telecast", data-index=telecast.type || "other", data-description=telecast.description!="" ? telecast.description : null)
+                            .telecast__time=telecast.time
+                            .telecast__title=telecast.title

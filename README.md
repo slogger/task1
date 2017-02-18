@@ -1,5 +1,7 @@
 # task1
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/slogger/task1.svg)](https://greenkeeper.io/)
+
 Было желание решить всю задачу не применяя JS
 
 Сразу пришла идея, как сделать фильтры, через css sibling, протестировал, все получилось
